@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Mall</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mall.Domain\Mall.Domain.csproj" />
+    <ProjectReference Include="..\Mall.Application.Contracts\Mall.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="2.7.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="2.7.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="2.7.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="2.7.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="2.7.0" />
+  </ItemGroup>
+
+</Project>
