@@ -1,33 +1,32 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using Redcat.Abp.AppManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectMapping;
 
-namespace Redcat.Abp.AuditLogging
+namespace Redcat.Abp.Mall
 {
-
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
-        typeof(AbpObjectMappingModule)
-        )]
-    public class AuditLoggingModule : AbpModule
+        typeof(AbpObjectMappingModule),
+        typeof(AppManagementModule)
+    )]
+    public class MallModule: AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAutoMapperObjectMapper<AuditLoggingModule>();
+            context.Services.AddAutoMapperObjectMapper<MallModule>();
             Configure<AbpAutoMapperOptions>(p =>
             {
-                p.AddMaps<AuditLoggingModule>(validate:true);
+                p.AddMaps<MallModule>(validate: true);
             });
 
             Configure<AbpAspNetCoreMvcOptions>(p =>
             {
                 p.MinifyGeneratedScript = true;
-                p.ConventionalControllers.Create(typeof(AuditLoggingModule).Assembly);
+                p.ConventionalControllers.Create(typeof(MallModule).Assembly);
             });
         }
     }

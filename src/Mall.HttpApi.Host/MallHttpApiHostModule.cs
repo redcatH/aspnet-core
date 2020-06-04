@@ -12,6 +12,7 @@ using Mall.EntityFrameworkCore;
 using Mall.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Microsoft.OpenApi.Models;
+using Redcat.Abp.AppManagement;
 using Swashbuckle.AspNetCore.Swagger;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -25,7 +26,8 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging;
+using Redcat.Abp.AuditLogging;
+using Redcat.Abp.Mall;
 
 namespace Mall
 {
@@ -39,7 +41,9 @@ namespace Mall
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AuditLoggingModule)
+        typeof(AuditLoggingModule),
+        typeof(AppManagementModule),
+        typeof(MallModule)
         )]
     public class MallHttpApiHostModule : AbpModule
     {

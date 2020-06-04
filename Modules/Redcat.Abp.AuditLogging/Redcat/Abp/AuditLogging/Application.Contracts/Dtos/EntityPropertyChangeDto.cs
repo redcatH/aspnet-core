@@ -1,7 +1,7 @@
 ﻿using System;
 using Volo.Abp.Application.Dtos;
 
-namespace Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Dtos
+namespace Redcat.Abp.AuditLogging.Application.Contracts.Dtos
 {
     public class EntityPropertyChangeDto:EntityDto<Guid>
     {

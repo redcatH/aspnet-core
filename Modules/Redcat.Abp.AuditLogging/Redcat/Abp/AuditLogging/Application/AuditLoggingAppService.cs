@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts;
-using Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Authorization;
-using Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Dtos;
+using Redcat.Abp.AuditLogging.Application.Contracts;
+using Redcat.Abp.AuditLogging.Application.Contracts.Authorization;
+using Redcat.Abp.AuditLogging.Application.Contracts.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AuditLogging;
 
-namespace Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application
+namespace Redcat.Abp.AuditLogging.Application
 {
 
     [Authorize(AuditLogPermission.AuditLogs.Default)]

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Dtos;
+using Redcat.Abp.AuditLogging.Application.Contracts.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.AuditLogging;
 
-namespace Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application
+namespace Redcat.Abp.AuditLogging.Application
 {
     public class AuditLoggingAutoMapperProfile: Profile
     {

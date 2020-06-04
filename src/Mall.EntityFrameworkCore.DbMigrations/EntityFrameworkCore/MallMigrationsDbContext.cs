@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Redcat.Abp.AppManagement.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -40,8 +41,13 @@ namespace Mall.EntityFrameworkCore
             builder.ConfigureFeatureManagement();
             builder.ConfigureTenantManagement();
 
+            //shop start
+            builder.ConfigureAppManagement();
+            //shop end
             builder.Entity<IdentityUser>().ConfigureCustomUserProperties(); //增加属性
             /* Configure your own tables/entities inside the ConfigureMall method */
+
+
 
             builder.ConfigureMall();
         }

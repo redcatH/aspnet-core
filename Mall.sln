@@ -43,6 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redcat.Abp.AuditLogging", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redcat.Abp.Blog", "Modules\Redcat.Abp.Blog\Redcat.Abp.Blog.csproj", "{89C341FD-23B4-458D-8F67-E2B54E1BF6E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redcat.Abp.AppManagement", "Modules\Redcat.Abp.AppManagement\Redcat.Abp.AppManagement.csproj", "{7E072C71-EF33-432E-8F89-3C015182A748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redcat.Abp.Mall", "Modules\Redcat.Abp.Mall\Redcat.Abp.Mall.csproj", "{EDC2CFCE-1A97-488D-9247-A7ED9AF15367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +121,14 @@ Global
 		{89C341FD-23B4-458D-8F67-E2B54E1BF6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C341FD-23B4-458D-8F67-E2B54E1BF6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C341FD-23B4-458D-8F67-E2B54E1BF6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E072C71-EF33-432E-8F89-3C015182A748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E072C71-EF33-432E-8F89-3C015182A748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E072C71-EF33-432E-8F89-3C015182A748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E072C71-EF33-432E-8F89-3C015182A748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC2CFCE-1A97-488D-9247-A7ED9AF15367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC2CFCE-1A97-488D-9247-A7ED9AF15367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC2CFCE-1A97-488D-9247-A7ED9AF15367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC2CFCE-1A97-488D-9247-A7ED9AF15367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +151,8 @@ Global
 		{748584B1-BA69-4F6A-81AA-F4BDE6BCE29D} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{17D2F875-110E-4D03-9CAD-830308F52309} = {829AF359-0093-4D16-95AA-4007359689F3}
 		{89C341FD-23B4-458D-8F67-E2B54E1BF6E5} = {829AF359-0093-4D16-95AA-4007359689F3}
+		{7E072C71-EF33-432E-8F89-3C015182A748} = {829AF359-0093-4D16-95AA-4007359689F3}
+		{EDC2CFCE-1A97-488D-9247-A7ED9AF15367} = {829AF359-0093-4D16-95AA-4007359689F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

@@ -4,14 +4,16 @@ using Mall.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Mall.Migrations
 {
     [DbContext(typeof(MallMigrationsDbContext))]
-    partial class MallMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200603110530_edit-app")]
+    partial class editapp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

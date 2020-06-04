@@ -4,14 +4,16 @@ using Mall.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Mall.Migrations
 {
     [DbContext(typeof(MallMigrationsDbContext))]
-    partial class MallMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200602135517_add_table_app")]
+    partial class add_table_app
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,9 +83,6 @@ namespace Mall.Migrations
                     b.Property<string>("ProviderName")
                         .HasColumnType("nvarchar(2)")
                         .HasMaxLength(2);
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

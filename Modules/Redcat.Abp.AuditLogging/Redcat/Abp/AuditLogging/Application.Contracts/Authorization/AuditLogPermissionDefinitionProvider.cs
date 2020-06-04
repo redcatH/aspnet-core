@@ -5,7 +5,7 @@ using Volo.Abp.AuditLogging.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
-namespace Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Authorization
+namespace Redcat.Abp.AuditLogging.Application.Contracts.Authorization
 {
     public class AuditLogPermissionDefinitionProvider : PermissionDefinitionProvider
     {

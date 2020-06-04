@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Redcat.Abp.AuditLogging\Redcat.Abp.AuditLogging.csproj" />
+    <ProjectReference Include="..\..\Modules\Redcat.Abp.Mall\Redcat.Abp.Mall.csproj" />
     <ProjectReference Include="..\Mall.Application\Mall.Application.csproj" />
     <ProjectReference Include="..\Mall.EntityFrameworkCore.DbMigrations\Mall.EntityFrameworkCore.DbMigrations.csproj" />
     <ProjectReference Include="..\Mall.HttpApi\Mall.HttpApi.csproj" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Reflection;
 
-namespace Redcat.Abp.AuditLogging.Redcat.Abp.AuditLogging.Application.Contracts.Authorization
+namespace Redcat.Abp.AuditLogging.Application.Contracts.Authorization
 {
     public static class AuditLogPermission
     {

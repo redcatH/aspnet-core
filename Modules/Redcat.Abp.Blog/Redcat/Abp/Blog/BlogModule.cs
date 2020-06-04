@@ -13,6 +13,11 @@ namespace Redcat.Abp.Blog.Redcat.Abp.Blog
        )]
     public class BlogModule
     {
+        
 
+        public BlogModule(string c)
+        {
+            
+        }
     }
 }

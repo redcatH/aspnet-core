@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200602095758_ad table app.cs" />
+    <Compile Remove="Migrations\20200602095758_ad table app.Designer.cs" />
+    <Compile Remove="Migrations\20200602095837_add-table-app.cs" />
+    <Compile Remove="Migrations\20200602095837_add-table-app.Designer.cs" />
+    <Compile Remove="Migrations\20200602100426_add-table-app.cs" />
+    <Compile Remove="Migrations\20200602100426_add-table-app.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Redcat.Abp.AppManagement\Redcat.Abp.AppManagement.csproj" />
     <ProjectReference Include="..\Mall.EntityFrameworkCore\Mall.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
