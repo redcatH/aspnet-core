@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mall.Users;
+using Redcat.Abp.AppManagement.EntityFrameworkCore;
+using Redcat.Abp.Mall.EntityFrameworkCore;
+using Redcat.Abp.Shops.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -52,8 +55,10 @@ namespace Mall.EntityFrameworkCore
             });
 
             /* Configure your own tables/entities inside the ConfigureMall method */
-
+            builder.ConfigureAppManagement();
+            builder.ConfigureMallHost();
             builder.ConfigureMall();
+            builder.ConfigureShops();
         }
     }
 }

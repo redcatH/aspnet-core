@@ -8,6 +8,8 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Redcat.Abp.Mall\Redcat.Abp.Mall.csproj" />
+    <ProjectReference Include="..\..\Modules\Redcat.Abp.Shops\Redcat.Abp.Shops.csproj" />
     <ProjectReference Include="..\Mall.Domain\Mall.Domain.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="2.8.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="2.8.0" />

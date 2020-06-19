@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Redcat.Abp.AppManagement\Redcat.Abp.AppManagement.csproj" />
+    <ProjectReference Include="..\Redcat.Abp.Shops\Redcat.Abp.Shops.csproj" />
   </ItemGroup>
 
 </Project>

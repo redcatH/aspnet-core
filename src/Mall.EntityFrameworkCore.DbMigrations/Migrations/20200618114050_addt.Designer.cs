@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mall.Migrations
 {
     [DbContext(typeof(MallMigrationsDbContext))]
-    [Migration("20200603110530_edit-app")]
-    partial class editapp
+    [Migration("20200618114050_addt")]
+    partial class addt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

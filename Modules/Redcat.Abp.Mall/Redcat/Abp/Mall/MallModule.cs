@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Redcat.Abp.AppManagement;
+using Redcat.Abp.Shops;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
@@ -11,7 +12,8 @@ namespace Redcat.Abp.Mall
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpObjectMappingModule),
-        typeof(AppManagementModule)
+        typeof(AppManagementModule),
+        typeof(ShopModule)
     )]
     public class MallModule: AbpModule
     {

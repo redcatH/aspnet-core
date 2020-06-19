@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mall.Migrations
 {
-    public partial class add_table_app : Migration
+    public partial class addt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,7 @@ namespace Mall.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
+                    Value = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 64, nullable: false),
                     ClientName = table.Column<string>(maxLength: 64, nullable: false),
                     ProviderName = table.Column<string>(maxLength: 2, nullable: true),

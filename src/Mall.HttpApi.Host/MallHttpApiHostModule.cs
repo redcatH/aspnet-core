@@ -28,6 +28,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Redcat.Abp.AuditLogging;
 using Redcat.Abp.Mall;
+using Redcat.Abp.Shops;
+using Microsoft.AspNetCore.Localization;
 
 namespace Mall
 {
@@ -123,11 +125,11 @@ namespace Mall
                     options.DocInclusionPredicate((docName, description) => true);
                     options.ResolveConflictingActions(p => p.First());
                 });
-
-            context.Services.PreConfigure<IIdentityServerBuilder>(options =>
-            {
-                options.AddExtensionGrantValidator<UserWithTenantGrantValidator>();
-            });
+            context.Services.AddSwaggerGenNewtonsoftSupport();
+            //context.Services.PreConfigure<IIdentityServerBuilder>(options =>
+            //{
+            //    options.AddExtensionGrantValidator<UserWithTenantGrantValidator>();
+            //});
         }
 
         private void ConfigureLocalization()
@@ -191,10 +193,13 @@ namespace Mall
             {
                 app.UseMultiTenancy();
             }
-
+            
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.UseAbpRequestLocalization();
+            app.UseAbpRequestLocalization(p=>
+            {
+                p.DefaultRequestCulture = new RequestCulture("zh-Hans");
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

@@ -11,7 +11,8 @@ namespace Redcat.Abp.AppManagement.Application
         public AppManagementAutoMapperProfile()
         {
             CreateMap<App, AppDto>();
-            CreateMap<CreateOrUpdateAppDto, App>();
+            CreateMap<AppCreateOrUpdateDto, App>();
+           
         }
     }
 }

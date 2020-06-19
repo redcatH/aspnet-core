@@ -17,7 +17,6 @@ namespace Redcat.Abp.AppManagement.Application.Contracts.Authorization
             apps.AddChild(AppManagentPermission.AppManagent.Create, L("Permission:Create"));
             apps.AddChild(AppManagentPermission.AppManagent.Update, L("Permission:Update"));
             apps.AddChild(AppManagentPermission.AppManagent.Delete, L("Permission:Delete"));
-
         }
 
         private static LocalizableString L(string name)

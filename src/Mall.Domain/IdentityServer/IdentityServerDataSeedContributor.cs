@@ -25,7 +25,7 @@ namespace Mall.IdentityServer
         private readonly IGuidGenerator _guidGenerator;
         private readonly IPermissionDataSeeder _permissionDataSeeder;
         private readonly IConfiguration _configuration;
-        
+        //private readonly IClientCorsOrigin 
 
         public IdentityServerDataSeedContributor(
             IClientRepository clientRepository,
@@ -124,9 +124,41 @@ namespace Mall.IdentityServer
                     new[] { "hybrid", "client_credentials", "password" },
                     (configurationSection["Mall_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     redirectUri: $"{webClientRootUrl}signin-oidc",
-                    postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc"
+                    postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc", Origins: new List<string> {
+                        "http://localhost:4200",
+                        "https://localhost:4200",
+                        "http://localhost:4201",
+                        "https://localhost:4201",
+                    "https://localhost:44351",
+                    "http://localhost:44351"}
                 );
             }
+
+
+            var AngularClientId = configurationSection["Angular_Web:ClientId"];
+            if (!AngularClientId.IsNullOrWhiteSpace())
+            {
+                var webClientRootUrl = configurationSection["Angular_Web:RootUrl"].EnsureEndsWith('/');
+
+                /* Mall_Web client is only needed if you created a tiered
+                 * solution. Otherwise, you can delete this client. */
+
+                await CreateClientAsync(
+                    AngularClientId,
+                    commonScopes,
+                    new[] { "hybrid", "client_credentials", "password" },
+                    (configurationSection["Angular_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    redirectUri: $"{webClientRootUrl}signin-oidc",
+                    postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc", Origins: new List<string> {
+                        "http://localhost:4200",
+                        "https://localhost:4200",
+                        "http://localhost:4201",
+                        "https://localhost:4201",
+                    "https://localhost:44351",
+                    "http://localhost:44351"}
+                );
+            }
+
 
             //Console Test Client
             var consoleClientId = configurationSection["Mall_App:ClientId"];
@@ -148,12 +180,13 @@ namespace Mall.IdentityServer
             string secret,
             string redirectUri = null,
             string postLogoutRedirectUri = null,
-            IEnumerable<string> permissions = null)
+            IEnumerable<string> permissions = null,IEnumerable<string> Origins=null)
         {
             var client = await _clientRepository.FindByCliendIdAsync(name);
             
             if (client == null)
             {
+
                 client = await _clientRepository.InsertAsync(
                     new Client(
                         _guidGenerator.Create(),
@@ -171,12 +204,25 @@ namespace Mall.IdentityServer
                         IdentityTokenLifetime = 300,
                         RequireConsent = false,
                         AllowAccessTokensViaBrowser=true, //增加允许浏览器token
+                        
                     },
                     autoSave: true
                 );
                 
             }
-            
+
+            //增加Origins
+            if (Origins != null)
+            {
+                foreach (var item in Origins)
+                {
+
+                    if (client.FindCorsOrigin(item) == null)
+                    {
+                        client.AddCorsOrigin(item);
+                    }
+                }
+            }
 
             foreach (var scope in scopes)
             {
@@ -223,7 +269,10 @@ namespace Mall.IdentityServer
                     permissions
                 );
             }
-
+            if (Origins != null)
+            {
+                
+            }
             return await _clientRepository.UpdateAsync(client);
         }
     }

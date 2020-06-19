@@ -26,7 +26,7 @@ namespace Redcat.Abp.AppManagement.Domain
             Value = value;
         }
 
-        protected App()
+        public App()
         {
             
         }

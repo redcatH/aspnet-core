@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Redcat.Abp.AppManagement.Application.Contracts.Authorization;
 using Redcat.Abp.AppManagement.Apps;
 using Redcat.Abp.AppManagement.Domain;
+using Redcat.Abp.Core;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -13,13 +15,15 @@ using Volo.Abp.Users;
 
 namespace Redcat.Abp.AppManagement.Application
 {
-    public class AppAppService: CrudAppService<App,AppDto, Guid,PagedAndSortedResultRequestDto, CreateOrUpdateAppDto, CreateOrUpdateAppDto>
+    public class AppAppService: CrudAppService<App,AppDto, Guid,PagedAndSortedResultRequestDto, AppCreateOrUpdateDto, AppCreateOrUpdateDto>
     {
         private readonly IAppDefinitionManager _appDefinitionManager;
         private readonly ICurrentTenant _currentTenant;
         private readonly ICurrentUser _currentUser;
+        private readonly IRepository<App,Guid> _appRepository;
         public AppAppService(IAppDefinitionManager appDefinitionManager,IRepository<App,Guid> appRepository, ICurrentTenant currentTenant, ICurrentUser currentUser) : base(appRepository)
         {
+            _appRepository = appRepository;
             this._appDefinitionManager = appDefinitionManager;
             _currentTenant = currentTenant;
             _currentUser = currentUser;
@@ -37,9 +41,15 @@ namespace Redcat.Abp.AppManagement.Application
             return list?.ToList();
         }
 
+        public async Task<GetForEditOutput<AppCreateOrUpdateDto>> GetForEdit(Guid id)
+        {
+            var shop = await _appRepository.FirstOrDefaultAsync(p => p.Id == id);
+            return new GetForEditOutput<AppCreateOrUpdateDto>(ObjectMapper.Map<App, AppCreateOrUpdateDto>(shop ?? new App()));
+        }
         
         protected override IQueryable<App> CreateFilteredQuery(PagedAndSortedResultRequestDto input)
         {
+            
             return this.Repository
                 .WhereIf(_currentTenant.Id.HasValue,
                     app => app.ProviderName == "T" && app.ProviderKey == this._currentTenant.Name.ToString())

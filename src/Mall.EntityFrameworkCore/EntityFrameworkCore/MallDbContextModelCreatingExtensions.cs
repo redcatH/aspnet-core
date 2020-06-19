@@ -8,7 +8,7 @@ namespace Mall.EntityFrameworkCore
 {
     public static class MallDbContextModelCreatingExtensions
     {
-        public static void ConfigureMall(this ModelBuilder builder)
+        public static void ConfigureMallHost(this ModelBuilder builder)
         {
             Check.NotNull(builder, nameof(builder));
 
