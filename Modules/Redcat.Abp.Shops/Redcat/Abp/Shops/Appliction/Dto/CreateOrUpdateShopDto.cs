@@ -6,7 +6,6 @@ namespace Redcat.Abp.Shops.Appliction.Dto
 {
     public class ShopCreateOrUpdateDto:EntityDto<Guid>
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string LogoImage { get; set; }

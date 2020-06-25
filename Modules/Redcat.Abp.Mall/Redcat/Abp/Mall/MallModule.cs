@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Redcat.Abp.AppManagement;
+using Redcat.Abp.OssManagement;
 using Redcat.Abp.Shops;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AutoMapper;
@@ -13,7 +14,8 @@ namespace Redcat.Abp.Mall
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpObjectMappingModule),
         typeof(AppManagementModule),
-        typeof(ShopModule)
+        typeof(ShopModule),
+        typeof(OssManagementModule)
     )]
     public class MallModule: AbpModule
     {

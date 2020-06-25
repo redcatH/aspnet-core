@@ -86,9 +86,25 @@ namespace Redcat.Abp.Shops.Appliction
             return ObjectMapper.Map<Shop, ShopDto>(shop);
         }
 
-        public override async Task<ShopDto> UpdateAsync(Guid Id,ShopCreateOrUpdateDto dto)
+        //public override Task<ShopDto> UpdateAsync(Guid id, ShopCreateOrUpdateDto input)
+        //{
+        //    var find = _shopRepository.FirstOrDefault(p => p.Name == input.Name);
+        //    if (find == null)
+        //    {
+        //        throw new EntityNotFoundException(typeof(ShopCreateOrUpdateDto), input.Name);
+        //    }
+        //    find.SetName(input.Name);
+        //    find.SetCoverImage(input.CoverImage);
+        //    find.SetLogoImg(input.LogoImage);
+        //    find.SetShortName(input.ShortName);
+        //    find.SetDescription(input.Description);
+        //    return ObjectMapper.Map<Shop, ShopDto>(find);
+        //    //return base.UpdateAsync(id, input);
+        //}
+
+        public override async Task<ShopDto> UpdateAsync(Guid id, ShopCreateOrUpdateDto dto)
         {
-            var find = await _shopRepository.FirstOrDefaultAsync(p => p.Name == dto.Name);
+            var find =await _shopRepository.FirstOrDefaultAsync(p => p.Name == dto.Name);
             if (find == null)
             {
                 throw new EntityNotFoundException(typeof(ShopCreateOrUpdateDto), dto.Name);
