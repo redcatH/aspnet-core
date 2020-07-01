@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Redcat.Abp.Shops.Appliction.Dto
 {
-    public class ShopCreateOrUpdateDto:EntityDto<Guid>
+    public class ShopCreateOrUpdateDto
     {
         public string Name { get; set; }
         public string ShortName { get; set; }

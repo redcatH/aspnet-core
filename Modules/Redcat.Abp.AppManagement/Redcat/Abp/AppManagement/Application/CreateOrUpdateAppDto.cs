@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Redcat.Abp.AppManagement.Application
 {
-    public class AppCreateOrUpdateDto : Entity<Guid>
+    public class AppCreateOrUpdateDto
     {
         public string Name { get; set; }
         public string ClientName { get; set; }

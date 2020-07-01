@@ -7,27 +7,30 @@ namespace Redcat.Abp.Mall.Domain
     /// <summary>
     /// APP产品分类
     /// </summary>
-    public class AppProductCategory:CreationAuditedEntity,IMultiTenant
+    public class AppProductCategory : CreationAuditedEntity, IMultiTenant
     {
         protected AppProductCategory()
         {
 
         }
-        public AppProductCategory(string appName, Guid? tenantId, ProductCategory productCategory)
+
+        public AppProductCategory(string appName, Guid? tenantId, Guid productCategoryId)
         {
             AppName = appName;
             TenantId = tenantId;
-            ProductCategory = productCategory;
+            ProductCategoryId = productCategoryId;
         }
-        
+
         public string AppName { get; set; }
+
         public override object[] GetKeys()
         {
             return new object[]
             {
-                AppName,ProductCategoryId
+                AppName, ProductCategoryId
             };
         }
+
         public Guid ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Redcat.Abp.AppManagement.Application.Contracts.Authorization;
 using Redcat.Abp.AppManagement.Apps;
 using Redcat.Abp.AppManagement.Domain;
@@ -44,7 +45,8 @@ namespace Redcat.Abp.AppManagement.Application
         public async Task<GetForEditOutput<AppCreateOrUpdateDto>> GetForEdit(Guid id)
         {
             var shop = await _appRepository.FirstOrDefaultAsync(p => p.Id == id);
-            return new GetForEditOutput<AppCreateOrUpdateDto>(ObjectMapper.Map<App, AppCreateOrUpdateDto>(shop ?? new App()));
+            var j = new JObject();
+            return new GetForEditOutput<AppCreateOrUpdateDto>(ObjectMapper.Map<App, AppCreateOrUpdateDto>(shop ?? new App()), j);
         }
         
         /// <summary>

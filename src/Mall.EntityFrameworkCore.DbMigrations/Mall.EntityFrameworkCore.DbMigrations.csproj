@@ -16,6 +16,10 @@
     <Compile Remove="Migrations\20200602100426_add-table-app.Designer.cs" />
     <Compile Remove="Migrations\20200609105406_add-mall.cs" />
     <Compile Remove="Migrations\20200609105406_add-mall.Designer.cs" />
+    <Compile Remove="Migrations\20200701160915_Init1.cs" />
+    <Compile Remove="Migrations\20200701160915_Init1.Designer.cs" />
+    <Compile Remove="Migrations\20200701161239_upgrade.cs" />
+    <Compile Remove="Migrations\20200701161239_upgrade.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

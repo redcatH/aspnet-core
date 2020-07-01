@@ -15,6 +15,7 @@ namespace Redcat.Abp.Mall.Redcat.Abp.Mall.Application
             CreateMap<MallShop, MallShopDto>();
             CreateMap<ProductCategory, ProductCategoryDto>();
             CreateMap<ProductCategoryDto, ProductCategory>();
+
         }
     }
 }

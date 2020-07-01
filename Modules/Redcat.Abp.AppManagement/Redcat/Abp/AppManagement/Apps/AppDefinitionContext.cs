@@ -26,9 +26,9 @@ namespace Redcat.Abp.AppManagement.Apps
             foreach (var definition
                 in definitions)
             {
-                if (!Apps.Keys.Contains(definition.Name))
+                if (!Apps.Keys.Contains(definition.name))
                 {
-                    Apps[definition.Name] = definition;
+                    Apps[definition.name] = definition;
                 }
             }
         }

@@ -18,12 +18,14 @@ namespace Redcat.Abp.Mall.Application.Category
     public class ProductCategoryAppService:CrudAppService<ProductCategory,ProductCategoryDto,Guid,PagedAndSortedResultRequestDto,ProductCategoryCreateOrUpdateDto,ProductCategoryCreateOrUpdateDto>, IProductCategoryAppService
     {
         private readonly IRepository<ProductCategory, Guid> _categories;
+        private readonly IRepository<AppProductCategory> _app;
         private readonly IAppDefinitionManager _appDefinitionManager;
 
-        public ProductCategoryAppService(IRepository<ProductCategory, Guid> repository, IAppDefinitionManager appDefinitionManager) : base(repository)
+        public ProductCategoryAppService(IRepository<ProductCategory, Guid> repository, IAppDefinitionManager appDefinitionManager, IRepository<AppProductCategory> app) : base(repository)
         {
             this._categories = repository;
             _appDefinitionManager = appDefinitionManager;
+            _app = app;
             ObjectMapperContext = typeof(MallModule);
         }
         ///// <summary>
@@ -41,26 +43,96 @@ namespace Redcat.Abp.Mall.Application.Category
 
         public async Task<GetForEditOutput<ProductCategoryCreateOrUpdateDto>> GetForEdit(Guid id)
         {
-            var find = await _categories.Include(p=>p.AppProductCategories).FirstOrDefaultAsync(p => p.Id == id);
-            var apps= await _appDefinitionManager.GetList();
-            
-            return new GetForEditOutput<ProductCategoryCreateOrUpdateDto>(ObjectMapper.Map<ProductCategory, ProductCategoryCreateOrUpdateDto>(find ?? new ProductCategory()));
+            var find = await _categories.Include(p => p.AppProductCategories).FirstOrDefaultAsync(p => p.Id == id);
+            var apps = await _appDefinitionManager.GetList();
+            var ori = find ?? new ProductCategory();
+            var schema = new JObject() { };
+            const string jKey = "name";
+            schema["apps"] = apps.GetJArray(jKey);
+            if (schema["apps"] is JArray)
+            {
+                foreach (var item in schema["apps"])
+                {
+                    item["checked"] = false;
+                }
+            }
+
+            if (find?.AppProductCategories == null && !(find?.AppProductCategories?.Count > 0))
+            {
+                return new GetForEditOutput<ProductCategoryCreateOrUpdateDto>(
+                    ObjectMapper.Map<ProductCategory, ProductCategoryCreateOrUpdateDto>(find ?? new ProductCategory()),
+                    schema);
+            }
+
+            {
+                foreach (var app in find.AppProductCategories)
+                {
+                    var temp = schema["apps"]?.FirstOrDefault(p => p[jKey]?.ToString() == app.AppName);
+                    if (temp != null)
+                    {
+                        temp["checked"] = true;
+                    }
+                }
+            }
+
+            return new GetForEditOutput<ProductCategoryCreateOrUpdateDto>(
+                ObjectMapper.Map<ProductCategory, ProductCategoryCreateOrUpdateDto>(find ?? new ProductCategory()),
+                schema);
         }
 
+        public override async Task<ProductCategoryDto> UpdateAsync(Guid id, ProductCategoryCreateOrUpdateDto input)
+        {
+            await base.CheckUpdatePolicyAsync();
+            var entity=await base.GetEntityByIdAsync(id);
+            var enumerable = input.apps.Where(p => p?.Value<bool>("checked") == true);
+            foreach (var item in enumerable)
+            {
+                var app= await this._appDefinitionManager.GetList();
+                var first = app.FirstOrDefault(p => p.name == item.Value<string>("name"));
+                if (first != null)
+                {
+                    await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, id), true);
+                }
+            }
+            base.MapToEntity(input, entity);
+            return base.MapToGetOutputDto(entity);
+        }
 
+        public  override async Task<ProductCategoryDto> CreateAsync(ProductCategoryCreateOrUpdateDto input)
+        {
+            await CheckCreatePolicyAsync();
 
-        //public async Task<ProductCategoryDto> CreateAsync(ProductCategoryCreateOrUpdateDto input)
-        //{
-        //    var categorie=await _categories.Include(p=>p.AppProductCategories).FirstOrDefaultAsync(p => p.Name == input.Id);
-        //    if(categorie==null)
-        //        new 
-        //}
+            var entity = MapToEntity(input);
+            TryToSetTenantId(entity);
+            await Repository.InsertAsync(entity, autoSave: true);
 
+            var enumerable = input.apps.Where(p => p?.Value<bool>("checked") == true);
+            foreach (var item in enumerable)
+            {
+                var app = await this._appDefinitionManager.GetList();
+                var first = app.FirstOrDefault(p => p.name == item.Value<string>("name"));
+                if (first != null)
+                {
+                    await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, entity.Id), true);
+                }
+            }
 
+            return MapToGetOutputDto(entity);
+        }
     }
 
-    public interface IProductCategoryAppService
+    public static class SchemaEx
     {
+        public static JArray GetJArray<T>(this IEnumerable<T> list,string jKey)
+        {
+            var jArray=new JArray();
+            foreach (var i in list)
+            {
+                var obj = new JObject {[jKey] = typeof(T).GetProperty(jKey)?.GetValue(i)?.ToString()};
+                jArray.Add(obj);
+            }
 
+            return jArray;
+        }
     }
 }

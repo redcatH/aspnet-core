@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Redcat.Abp.Core;
 using Redcat.Abp.Shops.Appliction.Dto;
 using Redcat.Abp.Shops.Domin;
@@ -32,7 +33,8 @@ namespace Redcat.Abp.Shops.Appliction
         public async Task<GetForEditOutput<ShopCreateOrUpdateDto>> GetForEdit(Guid id)
         {
             var shop = await _shopRepository.FirstOrDefaultAsync(p=>p.Id==id);
-            return new GetForEditOutput<ShopCreateOrUpdateDto>(ObjectMapper.Map<Shop,ShopCreateOrUpdateDto>(shop??new Shop()));
+            var j = new JObject();
+            return new GetForEditOutput<ShopCreateOrUpdateDto>(ObjectMapper.Map<Shop,ShopCreateOrUpdateDto>(shop??new Shop()), j);
         }
 
 

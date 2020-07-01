@@ -41,7 +41,7 @@ namespace Redcat.Abp.AppManagement.Apps
         public string Name => ProviderName;
         public Task<Dictionary<string, string>> GetOrNullAsync(AppDefinition appDefinition)
         {
-            return AppStore.GetOrNullAsync(appDefinition.Name, ProviderName, CurrentTenant.Name?.ToString());
+            return AppStore.GetOrNullAsync(appDefinition.name, ProviderName, CurrentTenant.Name?.ToString());
         }
     }
 
@@ -59,7 +59,7 @@ namespace Redcat.Abp.AppManagement.Apps
         public string Name => ProviderName;
         public Task<Dictionary<string, string>> GetOrNullAsync(AppDefinition appDefinition)
         {
-            return AppStore.GetOrNullAsync(appDefinition.Name, ProviderName, CurrentUser.UserName);
+            return AppStore.GetOrNullAsync(appDefinition.name, ProviderName, CurrentUser.UserName);
         }
     }
 
