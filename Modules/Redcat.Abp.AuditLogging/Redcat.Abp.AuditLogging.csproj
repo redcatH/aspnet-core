@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="2.9.0" />
-    <PackageReference Include="Volo.Abp.ObjectMapping" Version="2.9.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="3.0.0" />
+    <PackageReference Include="Volo.Abp.ObjectMapping" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
