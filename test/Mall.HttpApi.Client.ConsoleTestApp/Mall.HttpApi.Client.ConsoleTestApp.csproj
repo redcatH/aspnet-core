@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="3.0.0" />
     <ProjectReference Include="..\..\src\Mall.HttpApi.Client\Mall.HttpApi.Client.csproj" />
   </ItemGroup>
