@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Redcat.Abp.Mall.Domain
 {
-    public class MallShop:FullAuditedAggregateRoot<Guid>,IShop, IShopInternalData
+    public class MallShop:FullAuditedAggregateRoot<Guid>,IShop, IShopUpdate
     {
         protected MallShop()
         {
@@ -16,7 +16,6 @@ namespace Redcat.Abp.Mall.Domain
             TenantId = shopData.TenantId;
             ShopUpdate(shopData);
         }
-        public Guid? TenantId { get; private set; }
         public string Name { get; private set; }
         public string ShortName { get; private set; }
         public string LogoImage { get; private set; }
@@ -47,10 +46,8 @@ namespace Redcat.Abp.Mall.Domain
                    this.Description == shop.Description;
         }
 
+        public Guid? TenantId { get; set; }
     }
 
-    public interface IShopInternalData
-    {
-        bool ShopUpdate(IShopData shopData);
-    }
+
 }

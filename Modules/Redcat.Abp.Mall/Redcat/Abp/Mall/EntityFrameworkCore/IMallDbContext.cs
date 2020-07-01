@@ -13,5 +13,7 @@ namespace Redcat.Abp.Mall.EntityFrameworkCore
         DbSet<ProductSpu> ProductSpus { get; set; }
         DbSet<AppProductCategory> AppProductCategories { get; set; }
         #endregion
+
+        DbSet<MallShop> MallShops { get; set; }
     }
 }

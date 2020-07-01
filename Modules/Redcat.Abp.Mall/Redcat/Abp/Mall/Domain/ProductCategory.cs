@@ -12,13 +12,13 @@ namespace Redcat.Abp.Mall.Domain
     /// </summary>
     public class ProductCategory:AggregateRoot<Guid>,IMultiTenant
     {
-        protected ProductCategory()
+        public ProductCategory()
         {
         }
 
         public ProductCategory(Guid? tenantId)
         {
-            TenantId = tenantId;
+            this.TenantId = tenantId;
         }
         [NotNull]
         public string Name { get; set; }
@@ -28,6 +28,7 @@ namespace Redcat.Abp.Mall.Domain
         public virtual List<ProductSpu> ProductSpus { get; set; }
 
         public virtual ICollection<AppProductCategory> AppProductCategories { get; set; }
-        public Guid? TenantId { get; }
+
+        public Guid? TenantId { get; set; }
     }
 }

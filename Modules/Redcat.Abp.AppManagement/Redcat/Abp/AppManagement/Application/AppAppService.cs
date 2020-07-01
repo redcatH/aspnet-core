@@ -47,19 +47,20 @@ namespace Redcat.Abp.AppManagement.Application
             return new GetForEditOutput<AppCreateOrUpdateDto>(ObjectMapper.Map<App, AppCreateOrUpdateDto>(shop ?? new App()));
         }
         
+        /// <summary>
+        /// 每个租户只能看见对应租户下的 app
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         protected override IQueryable<App> CreateFilteredQuery(PagedAndSortedResultRequestDto input)
         {
-            
-            return this.Repository
+            return this.Repository.PageBy(input)
                 .WhereIf(_currentTenant.Id.HasValue,
                     app => app.ProviderName == "T" && app.ProviderKey == this._currentTenant.Name.ToString())
-                .WhereIf(!_currentTenant.Id.HasValue && !string.IsNullOrEmpty(_currentUser.UserName),
-                    app => app.ProviderName == "U" && app.ProviderKey == this._currentUser.UserName)
+                //.WhereIf(!_currentTenant.Id.HasValue && !string.IsNullOrEmpty(_currentUser.UserName),
+                //    app => app.ProviderName == "U" && app.ProviderKey == this._currentUser.UserName)
                 .WhereIf(!_currentTenant.Id.HasValue, 
-                    app => app.ProviderName == "T" && app.ProviderKey == "");
-
+                    app => app.ProviderName == "T" && app.ProviderKey == null);
         }
     }
-
-
 }

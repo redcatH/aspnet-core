@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Redcat.Abp.AppManagement;
+using Redcat.Abp.Mall.EntityFrameworkCore;
 using Redcat.Abp.OssManagement;
 using Redcat.Abp.Shops;
 using Volo.Abp.AspNetCore.Mvc;
@@ -21,10 +22,14 @@ namespace Redcat.Abp.Mall
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.AddAbpDbContext<MallDbContext>(optionsBuilder =>
+            {
+                optionsBuilder.AddDefaultRepositories();
+            });
             context.Services.AddAutoMapperObjectMapper<MallModule>();
             Configure<AbpAutoMapperOptions>(p =>
             {
-                p.AddMaps<MallModule>(validate: true);
+                p.AddMaps<MallModule>(validate: false);
             });
 
             Configure<AbpAspNetCoreMvcOptions>(p =>

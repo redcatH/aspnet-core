@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -113,10 +114,9 @@ namespace Redcat.Abp.Shops.Domin
         string Description { get; }
     }
 
-    public interface IShop
+    public interface IShop:IAggregateRoot<Guid>,IMultiTenant
     {
         Guid Id { get; }
-        Guid? TenantId { get; }
         string Name { get; }
         string ShortName { get; }
         string LogoImage { get; }

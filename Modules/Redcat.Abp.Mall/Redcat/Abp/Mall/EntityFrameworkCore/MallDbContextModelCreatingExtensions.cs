@@ -63,6 +63,16 @@ namespace Redcat.Abp.Mall.EntityFrameworkCore
                     v => JsonConvert.DeserializeObject<List<string>>(v,
                         new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore}));
             });
+
+            builder.Entity<MallShop>(t =>
+            {
+                t.ToTable(MallConsts.DbTablePrefix + "MallShop", MallConsts.DbSchema);
+                t.ConfigureFullAuditedAggregateRoot();
+                t.Property(p => p.Name).IsRequired().HasMaxLength(MallConsts.NameMaxLength);
+                t.Property(p => p.LogoImage).HasMaxLength(MallConsts.UrlMaxLength);
+                t.Property(p => p.CoverImage).HasMaxLength(MallConsts.UrlMaxLength);
+                t.Property(p => p.ShortName).IsRequired().HasMaxLength(MallConsts.NameMaxLength);
+            });
         }
     }
 }

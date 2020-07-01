@@ -104,7 +104,7 @@ namespace Redcat.Abp.Shops.Appliction
 
         public override async Task<ShopDto> UpdateAsync(Guid id, ShopCreateOrUpdateDto dto)
         {
-            var find =await _shopRepository.FirstOrDefaultAsync(p => p.Name == dto.Name);
+            var find =await _shopRepository.FirstOrDefaultAsync(p => p.Id == id);
             if (find == null)
             {
                 throw new EntityNotFoundException(typeof(ShopCreateOrUpdateDto), dto.Name);

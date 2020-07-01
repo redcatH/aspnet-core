@@ -38,7 +38,7 @@ namespace Redcat.Abp.Shops.EntityFrameworkCore
                 t.Property(p => p.ShortName).IsRequired().HasMaxLength(ShopsConsts.NameMaxLength);
             });
         }
-    } 
+    }
 }
 
 namespace Redcat.Abp.Shops.Domin

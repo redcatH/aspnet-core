@@ -31,6 +31,6 @@ namespace Redcat.Abp.Mall.Domain
         public Guid ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
 
-        public Guid? TenantId { get; }
+        public Guid? TenantId { get; set; }
     }
 }

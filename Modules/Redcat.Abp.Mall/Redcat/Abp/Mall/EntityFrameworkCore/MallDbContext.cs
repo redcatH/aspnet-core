@@ -14,6 +14,7 @@ namespace Redcat.Abp.Mall.EntityFrameworkCore
         public DbSet<ProductSku> ProductSkus { get; set; }
         public DbSet<ProductSpu> ProductSpus { get; set; }
         public DbSet<AppProductCategory> AppProductCategories { get; set; }
+        public DbSet<MallShop> MallShops { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

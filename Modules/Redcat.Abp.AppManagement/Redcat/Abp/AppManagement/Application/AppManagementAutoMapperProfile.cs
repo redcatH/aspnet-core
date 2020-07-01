@@ -12,7 +12,7 @@ namespace Redcat.Abp.AppManagement.Application
         {
             CreateMap<App, AppDto>();
             CreateMap<AppCreateOrUpdateDto, App>();
-           
+            CreateMap<App, AppCreateOrUpdateDto>();
         }
     }
 }

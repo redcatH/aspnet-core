@@ -7,7 +7,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Guids;
 using Volo.Abp.Settings;
 
-namespace Redcat.Abp.OssManagement.Redcat.Abp.OssManagement.Application
+namespace Redcat.Abp.OssManagement.Application
 {
     public class OssAppService: ApplicationService
     {
@@ -39,11 +39,14 @@ namespace Redcat.Abp.OssManagement.Redcat.Abp.OssManagement.Application
             string bucketName= await _setting.GetOrNullAsync(MallSettings.BucketName);
             Mac mac = new Mac(ak, sk);
             Auth auth = new Auth(mac);
+
+            var saveKey = _guidGenerator.Create().ToString() + "$(ext)";
+            
             PutPolicy putPolicy = new PutPolicy();
             putPolicy.MimeLimit = "image/jpeg;image/png";
             putPolicy.SetExpires(3600);
             putPolicy.Scope = bucketName;// "ly-blg-imagehosting";
-            putPolicy.SaveKey = _guidGenerator.Create().ToString() + "$(ext)";
+            putPolicy.SaveKey = saveKey;
             string token = Auth.CreateUploadToken(mac, putPolicy.ToJsonString());
             return await Task.FromResult(new { token });
         }

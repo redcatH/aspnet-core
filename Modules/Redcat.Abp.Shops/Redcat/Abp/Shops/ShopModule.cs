@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Redcat.Abp.Shops.Domin.Repository;
 using Redcat.Abp.Shops.EntityFrameworkCore;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AutoMapper;
@@ -26,6 +27,7 @@ namespace Redcat.Abp.Shops
                 p.MinifyGeneratedScript = true;
                 p.ConventionalControllers.Create(typeof(ShopModule).Assembly);
             });
+            context.Services.AddTransient<IExternalShopLookupService, DefaultExternalShopLookupServiceProvider>();
         }
     }
 }

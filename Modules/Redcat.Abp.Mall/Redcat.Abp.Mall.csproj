@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Redcat.Abp.Shops\Redcat.Abp.Shops.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Redcat\Abp\Mall\Repository\" />
+  </ItemGroup>
+
 </Project>

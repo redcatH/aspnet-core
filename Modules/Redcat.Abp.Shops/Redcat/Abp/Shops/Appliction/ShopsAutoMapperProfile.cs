@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Redcat.Abp.Shops.Appliction.Dto;
 using Redcat.Abp.Shops.Domin;
+using Volo.Abp.AutoMapper;
+using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Redcat.Abp.Shops.Appliction
 {
@@ -9,7 +11,7 @@ namespace Redcat.Abp.Shops.Appliction
         public ShopsAutoMapperProfile()
         {
             CreateMap<Shop, ShopDto>();
-            CreateMap<ShopCreateOrUpdateDto, Shop>();
+            CreateMap<ShopCreateOrUpdateDto, Shop>().IgnoreFullAuditedObjectProperties();
             CreateMap<Shop, ShopCreateOrUpdateDto>();
         }
     }

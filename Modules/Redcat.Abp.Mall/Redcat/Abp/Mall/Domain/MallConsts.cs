@@ -22,6 +22,7 @@ namespace Redcat.Abp.Mall.Domain
 
         //sku
         public const int NameMaxLength = 64;
-        
+
+        public static int DesMaxLength = 1024;
     }
 }
