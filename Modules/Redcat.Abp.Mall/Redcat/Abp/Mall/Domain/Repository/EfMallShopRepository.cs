@@ -27,6 +27,7 @@ namespace Redcat.Abp.Mall.Domain.Repository
             
         }
 
+        
         public override MallShop CreateShop(IShopData shopData)
         {
             return new MallShop(shopData);

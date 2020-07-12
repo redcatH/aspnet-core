@@ -22,9 +22,10 @@ namespace Redcat.Abp.Mall
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            
             context.Services.AddAbpDbContext<MallDbContext>(optionsBuilder =>
             {
-                optionsBuilder.AddDefaultRepositories();
+                optionsBuilder.AddDefaultRepositories(true);
             });
             context.Services.AddAutoMapperObjectMapper<MallModule>();
             Configure<AbpAutoMapperOptions>(p =>

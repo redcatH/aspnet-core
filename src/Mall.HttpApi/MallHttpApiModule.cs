@@ -23,6 +23,7 @@ namespace Mall
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.Replace(ServiceDescriptor.Transient<IAbpServiceConvention, RedcatAbpServiceConvention>());
+            
         }
     }
 }

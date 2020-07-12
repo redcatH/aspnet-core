@@ -30,7 +30,7 @@ namespace Redcat.Abp.Mall.EntityFrameworkCore
                 t.Property(p => p.Name).IsRequired().HasMaxLength(MallConsts.CategoryMaxLength);
                 t.Property(p => p.LogoImage).HasMaxLength(MallConsts.ImageMaxLength);
                 t.Property(p => p.RedirectUrl).HasMaxLength(MallConsts.UrlMaxLength);
-                t.Property(p => p.ShortNmae).HasMaxLength(MallConsts.ShortNameMaxLength);
+                t.Property(p => p.ShortName).HasMaxLength(MallConsts.ShortNameMaxLength);
                 t.HasMany(p => p.ProductSpus).WithOne(p => p.ProductCategory).HasForeignKey(p => p.CategoryId);
                 t.HasMany(p => p.AppProductCategories).WithOne(p => p.ProductCategory).HasForeignKey(p=>p.ProductCategoryId);
             });

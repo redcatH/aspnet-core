@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\20200701160915_Init1.Designer.cs" />
     <Compile Remove="Migrations\20200701161239_upgrade.cs" />
     <Compile Remove="Migrations\20200701161239_upgrade.Designer.cs" />
+    <Compile Remove="Migrations\20200708044208_addProductSpuITenant.cs" />
+    <Compile Remove="Migrations\20200708044208_addProductSpuITenant.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,6 +14,7 @@ namespace Redcat.Abp.Mall.Domain
     /// </summary>
     public class ProductSpu:AggregateRoot<Guid>,IMultiTenant, IMultiShop
     {
+        
         public ProductSpu(Guid id,Guid categoryId)
         {
 
@@ -21,7 +22,7 @@ namespace Redcat.Abp.Mall.Domain
             CategoryId = categoryId;
         }
 
-        protected ProductSpu()
+        public ProductSpu()
         {
 
         }
@@ -42,6 +43,7 @@ namespace Redcat.Abp.Mall.Domain
             ProductSkus = productSkus;
             TenantId = tenantId;
         }
+        public Guid? TenantId { get; set; }
         public Guid? ShopId { get; set; }
         /// <summary>
         /// 商品编码
@@ -54,6 +56,7 @@ namespace Redcat.Abp.Mall.Domain
         /// </summary>
         [NotNull]public virtual string Name { get; set; }
         /// <summary>
+        /// 公用商品详情
         /// 公用商品详情
         /// </summary>
         [CanBeNull]public virtual string DescCommon { get; set; }
@@ -92,6 +95,6 @@ namespace Redcat.Abp.Mall.Domain
         [CanBeNull]
         public ICollection<ProductSku> ProductSkus { get; set; }
 
-        public Guid? TenantId { get; }
+        
     }
 }

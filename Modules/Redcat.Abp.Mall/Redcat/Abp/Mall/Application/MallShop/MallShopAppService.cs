@@ -36,7 +36,7 @@ namespace Redcat.Abp.Mall.Application
 
         public async Task<PagedResultDto<MallShopDto>> GetListAsync(PagedResultRequestDto input)
         {
-
+            
             var count = await _mallShopRepository.GetCountAsync();
             var list=await _mallShopRepository.GetDbSet().PageBy(input).AsNoTracking().ToListAsync();
             var dto = ObjectMapper.Map<List<MallShop>, List<MallShopDto>>(list);

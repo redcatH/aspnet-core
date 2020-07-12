@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using JetBrains.Annotations;
 using Redcat.Abp.Shops.MultiShop;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.Guids;
 using Volo.Abp.MultiTenancy;
 
 namespace Redcat.Abp.Mall.Domain
@@ -13,11 +14,15 @@ namespace Redcat.Abp.Mall.Domain
     /// </summary>
     public class ProductSku:AggregateRoot<Guid>,IMultiTenant,IMultiShop
     {
-        protected ProductSku()
+        public ProductSku()
         {
 
         }
 
+        public ProductSku(string name)
+        {
+            this.Name = name;
+        }
         public ProductSku(decimal price, decimal? originPrice, decimal? vipPrice, List<string> coverImageUrls, DateTime? dateTimeStart, DateTime? dateTimeEnd, int? limitBuyCount, int? soldCount, int stockCount, [CanBeNull] string code, string unit, [NotNull] string name, [CanBeNull] string desc, [CanBeNull] string purchaseNotes, Guid spuId, ProductSpu productSpu, Guid? tenantId, Guid? shopId)
         {
             Price = price;
@@ -105,7 +110,17 @@ namespace Redcat.Abp.Mall.Domain
         [ForeignKey("SpuId")]
         public ProductSpu ProductSpu { get; set; }
 
-        public Guid? TenantId { get; }
+        public Guid? TenantId { get; set; }
         public Guid? ShopId { get; set; }
+
+        public void SetEntityGuid(IGuidGenerator guidGenerator)
+        {
+            this.Id = guidGenerator.Create();
+        }
+
+        public void SetTenantId(Guid? id)
+        {
+            this.TenantId = id;
+        }
     }
 }

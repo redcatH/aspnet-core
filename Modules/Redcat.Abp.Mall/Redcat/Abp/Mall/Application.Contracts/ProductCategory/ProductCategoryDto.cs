@@ -7,6 +7,9 @@ namespace Redcat.Abp.Mall.Application.Contracts
 {
     public class ProductCategoryDto:EntityDto<Guid>
     {
-
+        public string Name { get; set; }
+        public string ShortNmae { get; set; }
+        public string LogoImage { get; set; }
+        public string RedirectUrl { get; set; }
     }
 }

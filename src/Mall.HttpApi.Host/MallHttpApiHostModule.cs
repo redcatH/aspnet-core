@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -30,6 +32,7 @@ using Redcat.Abp.AuditLogging;
 using Redcat.Abp.Mall;
 using Redcat.Abp.Shops;
 using Microsoft.AspNetCore.Localization;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Mall
 {
@@ -124,6 +127,28 @@ namespace Mall
                     options.SwaggerDoc("v1", new OpenApiInfo {Title = "Mall API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.ResolveConflictingActions(p => p.First());
+
+                    //下面是给swagger添加一个验证功能
+                    var security = new OpenApiSecurityScheme()
+                    {
+                        Description = "Bearer {Token}",
+                        Name = "验证",
+                        In =  ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey
+                    };
+
+                    options.AddSecurityDefinition("JWT",security);
+                    var osr = new OpenApiSecurityRequirement()
+                    {
+                        {
+                            security, new List<string>()
+                        }
+                    };
+                    options.AddSecurityRequirement(osr);
+                    options.OperationFilter<AddResponseHeadersFilter>();
+                    options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+                    options.OperationFilter<SecurityRequirementsOperationFilter>();
+
                 });
             context.Services.AddSwaggerGenNewtonsoftSupport();
             //context.Services.PreConfigure<IIdentityServerBuilder>(options =>

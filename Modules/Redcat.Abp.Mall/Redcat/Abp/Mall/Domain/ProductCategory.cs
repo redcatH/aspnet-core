@@ -22,7 +22,7 @@ namespace Redcat.Abp.Mall.Domain
         }
         [NotNull]
         public string Name { get; set; }
-        public string ShortNmae { get; set; }
+        public string ShortName { get; set; }
         public string LogoImage { get; set; }
         public string RedirectUrl { get; set; }
         public virtual List<ProductSpu> ProductSpus { get; set; }

@@ -9,7 +9,7 @@ namespace Redcat.Abp.Mall.Domain
     /// </summary>
     public class AppProductCategory : CreationAuditedEntity, IMultiTenant
     {
-        protected AppProductCategory()
+        public AppProductCategory()
         {
 
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Redcat.Abp.AppManagement.Apps;
@@ -80,18 +82,43 @@ namespace Redcat.Abp.Mall.Application.Category
                 schema);
         }
 
+
+        protected override IQueryable<ProductCategory> CreateFilteredQuery(PagedAndSortedResultRequestDto input)
+        {
+            return base.ReadOnlyRepository.Include(p => p.AppProductCategories);
+        }
+
         public override async Task<ProductCategoryDto> UpdateAsync(Guid id, ProductCategoryCreateOrUpdateDto input)
         {
             await base.CheckUpdatePolicyAsync();
-            var entity=await base.GetEntityByIdAsync(id);
-            var enumerable = input.apps.Where(p => p?.Value<bool>("checked") == true);
+            var entity= await _categories.Include(p => p.AppProductCategories).FirstOrDefaultAsync(p => p.Id == id);
+
+            var enumerable = input.apps.ToDynamicList();
             foreach (var item in enumerable)
             {
                 var app= await this._appDefinitionManager.GetList();
-                var first = app.FirstOrDefault(p => p.name == item.Value<string>("name"));
-                if (first != null)
+                var first = app.FirstOrDefault(p => p.name == item.Value<string>("label"));
+                var label = item.Value<string>("label");
+                var isChecked= item.Value<bool>("checked");
+                var appEntity = entity?.AppProductCategories.FirstOrDefault(p => p.AppName == label);
+
+                if (first==null)
                 {
-                    await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, id), true);
+                    continue;
+                }
+                if (isChecked)
+                {
+                    if (appEntity==null)
+                    {
+                        await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, id), true);
+                    }
+                }
+                else
+                {
+                    if (appEntity != null)
+                    {
+                        await _app.DeleteAsync(appEntity);
+                    }
                 }
             }
             base.MapToEntity(input, entity);
@@ -106,29 +133,35 @@ namespace Redcat.Abp.Mall.Application.Category
             TryToSetTenantId(entity);
             await Repository.InsertAsync(entity, autoSave: true);
 
-            var enumerable = input.apps.Where(p => p?.Value<bool>("checked") == true);
-            foreach (var item in enumerable)
+            var enumerable = input.apps?.Where(p => p?.Value<bool>("checked") == true);
+            if (enumerable != null)
             {
-                var app = await this._appDefinitionManager.GetList();
-                var first = app.FirstOrDefault(p => p.name == item.Value<string>("name"));
-                if (first != null)
+                foreach (var item in enumerable)
                 {
-                    await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, entity.Id), true);
+                    var app = await this._appDefinitionManager.GetList();
+                    var first = app.FirstOrDefault(p => p.name == item.Value<string>("name"));
+                    if (first != null)
+                    {
+                        await _app.InsertAsync(new AppProductCategory(first.name, entity.TenantId, entity.Id), true);
+                    }
                 }
             }
-
             return MapToGetOutputDto(entity);
         }
     }
 
     public static class SchemaEx
     {
-        public static JArray GetJArray<T>(this IEnumerable<T> list,string jKey)
+        public static JArray GetJArray<T>(this IEnumerable<T> list, params string[] keys)
         {
             var jArray=new JArray();
             foreach (var i in list)
             {
-                var obj = new JObject {[jKey] = typeof(T).GetProperty(jKey)?.GetValue(i)?.ToString()};
+                var obj = new JObject { };
+                foreach (var key in keys)
+                {
+                    obj.TryAdd(key, typeof(T).GetProperty(key)?.GetValue(i)?.ToString());
+                }
                 jArray.Add(obj);
             }
 

@@ -13,11 +13,8 @@ namespace Redcat.Abp.Mall.Redcat.Abp.Mall.Application.Contracts
         {
             CreateMap<ProductCategory, ProductCategoryDto>();
             CreateMap<ProductCategoryCreateOrUpdateDto, ProductCategory>();
-            CreateMap<ProductCategory, ProductCategoryCreateOrUpdateDto>().ForMember(p => p.apps,
-                p =>
-                {
-                    p.MapFrom(s=>s.AppProductCategories);
-                });
+            CreateMap<ProductCategory, ProductCategoryCreateOrUpdateDto>();
+
         }
     }
 }

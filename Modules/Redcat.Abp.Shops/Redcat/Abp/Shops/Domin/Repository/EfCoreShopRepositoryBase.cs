@@ -54,9 +54,9 @@ namespace Redcat.Abp.Shops.Domin.Repository
             this._externalShopLookupService = externalShopLookupService;
             _unitOfWorkManager = unitOfWorkManager;
         }
-        public Task<TShop> FindShopById(Guid id, CancellationToken cancellationToken = default)
+        public async Task<TShop> FindShopById(Guid id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _localShopRepository.FindAsync(id, cancellationToken:cancellationToken);
         }
 
         public async Task<TShop> ShopSync(Guid id, CancellationToken cancellationToken = default)
